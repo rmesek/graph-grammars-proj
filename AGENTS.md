@@ -46,6 +46,7 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
 ## Git
 
 - Never push to `main`; branch `<issue>-<slug>`, PR via `gh pr create` with `Closes #<issue>`.
-- Commit messages: imperative, short. **No `Co-authored-by` or other AI attribution trailers**
-  in commits or PR descriptions.
+- Commit messages: imperative, short. **No `Co-authored-by` or other AI attribution trailers.**
+- PR description ends with one short line naming the agent and model, e.g.
+  `Agent: Claude Code (Claude Opus 5.5)`.
 - Update `PROGRESS.md` in every PR.
