@@ -1,8 +1,9 @@
 """Base class of all productions: LHS pattern + applicability predicate + transformation.
 
-A match ``m`` maps pattern nodes to host nodes. Pattern ids follow the slides: triangle ``k``
-and its bonds ``(k, 1)``, ``(k, 2)``, ``(k, 3)``. Pattern bond numbers are free (any host bond
-may play bond 1); geometry must use the host bond's ``index`` attribute.
+A match ``m`` maps pattern nodes to host nodes: triangle ``k`` (0, 1, ...) and its bonds
+``(k, 1)``, ``(k, 2)``, ``(k, 3)``. On two-triangle slides, bonds 4,5,6 map to ``(0, 1..3)``
+and 1,2,3 to ``(1, 1..3)``. Pattern bond numbers are free (any host bond may match bond 1);
+for geometry (e.g. ``bisect``) always read the host bond's ``g.nodes[bond]["index"]``.
 """
 
 from abc import ABC, abstractmethod

@@ -20,22 +20,24 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
   Bond node `label="bond"` (`index`, `RE`, `B`, `BR`), id `(t, index)`. Bond `i` is the side
   opposite `Pi`; the peak is opposite the `RE` bond. Edges: T–bond, bond–bond (shared side).
 - `nvb.productions.base.Production` — subclass sets `name`, `lhs = pattern(...)`, implements
-  `predicate(g, m)` and `transform(g, m)`. `m` maps pattern ids (`k`, `(k, i)`, slide numbering)
-  to host nodes. Matching is `networkx` subgraph monomorphism; `apply(g, at=node)` anchors it.
-  Pattern bond numbers are free; geometry must use the host bond's `index`.
+  `predicate(g, m)` and `transform(g, m)`. `m` maps pattern ids (`k`, `(k, i)`; on two-triangle
+  slides bonds 4,5,6 map to `(0, 1..3)` and 1,2,3 to `(1, 1..3)`) to host nodes. Matching is
+  `networkx` subgraph monomorphism; `apply(g, at=node)` anchors it. Pattern bond numbers are
+  free; geometry must use the host bond's `index`.
 - Embedding: new triangles take over external connections via `graph.rewire(old, new)`.
 - `graph.bisect(vertices, ref)` gives both children (Calculate1/2): newest vertex = midpoint
-  of the refinement edge; child bond 1 = new refinement edge. Use it in P3 and P4.
+  of the refinement edge; child bond 1 = new refinement edge. Use it in P3 and P4 (in P3,
+  pair shared-edge halves by `set(side(g, ...))`, not child index 0/1).
 - `nvb.mesh` initial meshes, `nvb.viz` matplotlib drawing, `nvb.cli` typer CLI.
 
 ## Adding production PN
 
 1. `src/nvb/productions/pN.py` with `class PN(Production)`; registered automatically.
 2. `tests/test_pN.py` covering every README "Definition of Done" item, modelled on
-   `tests/test_p0.py`: build the expected graph by hand, compare with `nx.utils.graphs_equal`;
-   `viz_save` for before/after drawings; reuse `tests/conftest.py` fixtures, define new ones
-   in your own test file.
-   `tests/test_contract.py` (shared) must pass too: it states what the next stage expects.
+   `tests/test_p0.py`: build the expected graph by hand, compare with `nx.utils.graphs_equal`
+   (P0–P2) or `nx.is_isomorphic(g, expected, node_match=operator.eq)` (P3–P4); `viz_save` for
+   before/after drawings; reuse `tests/conftest.py` fixtures, define new ones in your own test
+   file. `tests/test_contract.py` (shared) must pass too: it states what the next stage expects.
 3. Log changes under your issue's section in `PROGRESS.md`.
 
 A production PR touches only these three places. Changes to shared code (`graph`, `base`,
@@ -52,7 +54,7 @@ A production PR touches only these three places. Changes to shared code (`graph`
 
 ## Git
 
-- Never push to `main`; branch `<issue>-<slug>`, PR via `gh pr create` with `Closes #<issue>`.
+- Never push to `main`; branch `<issue>-<slug>`, PR via GitHub UI or `gh pr create` with `Closes #<issue>`.
 - Commit messages: imperative, short. **No `Co-authored-by` or other AI attribution trailers.**
 - PR description ends with one short line naming the agent and model, e.g.
   `Agent: Claude Code (Claude Opus 5.5)`.

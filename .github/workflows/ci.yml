@@ -1,7 +1,9 @@
-# Runs only on PRs to main (main is protected: branch must be up to date, so no re-run after merge).
+# Fast PR feedback (lint + Ubuntu tests in parallel); full 3-OS matrix runs on push to main.
 name: CI
 on:
   pull_request:
+    branches: [main]
+  push:
     branches: [main]
   workflow_dispatch:
 
@@ -24,10 +26,9 @@ jobs:
       - run: uv run ruff check .
 
   test:
-    needs: lint
     strategy:
       matrix:
-        os: [ubuntu-26.04, windows-latest, macos-latest]
+        os: ${{ fromJSON(github.event_name == 'pull_request' && '["ubuntu-26.04"]' || '["ubuntu-26.04", "windows-latest", "macos-latest"]') }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:

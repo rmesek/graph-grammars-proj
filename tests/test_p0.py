@@ -1,8 +1,10 @@
 """P0: mark an element for refinement. Sections follow the README "Definition of Done".
 
 Pattern for every production test: build ``expected`` by hand (a copy of the input plus
-the RHS changes), apply, then ``nx.utils.graphs_equal`` checks nodes, edges, labels and all
-attributes at once, so damage anywhere in a bigger graph is caught.
+the RHS changes), apply, then compare the whole graph so damage anywhere in a bigger graph
+is caught. P0–P2 keep node ids, so ``nx.utils.graphs_equal`` works directly; P3–P4 create
+new triangles (new ids / ``next_id``), so use
+``nx.is_isomorphic(g, expected, node_match=operator.eq)`` instead.
 """
 
 import networkx as nx
