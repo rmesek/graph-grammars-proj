@@ -215,5 +215,5 @@ def test_bisection_leaves_fresh_conforming_children(build, name, parents):
     for t in new:
         assert newest not in cg.side(g, re_bond(g, t)), f"{name}: newest vertex = child's peak"
         assert g.nodes[t]["R"] == 0, f"{name}: children start unmarked (R=0)"
-        # In these states outer sides had BR=0, so inheriting BR on outer sides keeps BR=0.
+        # Unsplit parent sides had BR=0 here; new interior sides and RE halves always have BR=0.
         assert all(g.nodes[b]["BR"] == 0 for b in cg.bonds(g, t)), f"{name}: children need BR=0"
