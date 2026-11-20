@@ -9,7 +9,7 @@ Materiały: [NewestVertex.pdf](docs/NewestVertex.pdf) (specyfikacja),
 
 ## Instalacja i uruchomienie
 
-Wymagany tylko [uv](https://docs.astral.sh/uv/) (Python 3.13 pobiera się automatycznie przy `uv sync`).
+Wymagany [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync                                        # środowisko + zależności
