@@ -14,6 +14,13 @@ app = typer.Typer(no_args_is_help=True, help="Newest Vertex Bisection as a cp-gr
 MeshOpt = Annotated[str, typer.Option(help=f"Initial mesh: {', '.join(MESHES)}.")]
 SizeOpt = Annotated[int, typer.Option("-n", help="Mesh size (cells per side).")]
 OutOpt = Annotated[Path, typer.Option("--out", "-o", help="Output PNG.")]
+GraphOpt = Annotated[
+    bool | None,
+    typer.Option(
+        "--graph/--no-graph",
+        help=f"Draw the cp-graph (default: up to {viz.GRAPH_LIMIT} triangles).",
+    ),
+]
 
 
 @app.command("list")
@@ -24,9 +31,14 @@ def list_productions() -> None:
 
 
 @app.command()
-def draw(mesh: MeshOpt = "square", n: SizeOpt = 1, out: OutOpt = Path("out/mesh.png")) -> None:
+def draw(
+    mesh: MeshOpt = "square",
+    n: SizeOpt = 1,
+    out: OutOpt = Path("out/mesh.png"),
+    graph: GraphOpt = None,
+) -> None:
     """Draw an initial mesh with its cp-graph."""
-    typer.echo(viz.save(MESHES[mesh](n), out, title=f"{mesh} n={n}"))
+    typer.echo(viz.save(MESHES[mesh](n), out, title=f"{mesh} n={n}", graph=graph))
 
 
 @app.command()
@@ -36,6 +48,7 @@ def apply(
     n: SizeOpt = 1,
     at: Annotated[int | None, typer.Option(help="Anchor triangle id.")] = None,
     out: OutOpt = Path("out/apply.png"),
+    graph: GraphOpt = None,
 ) -> None:
     """Apply productions to an initial mesh and draw the result."""
     if unknown := [x for x in names if x not in PRODUCTIONS]:
@@ -43,4 +56,4 @@ def apply(
     g = MESHES[mesh](n)
     for name in names:
         typer.echo(f"{name}: {'applied' if PRODUCTIONS[name].apply(g, at) else 'no match'}")
-    typer.echo(viz.save(g, out, title=" -> ".join(names)))
+    typer.echo(viz.save(g, out, title=" -> ".join(names), graph=graph))
