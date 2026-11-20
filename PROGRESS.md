@@ -8,6 +8,8 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
 - 2026-11-20 — uv/ruff/pytest, CI tylko na PR (lint → testy Ubuntu/Windows/macOS), model
   cp-grafu (networkx, bondy jako węzły), `Production` + `pattern()`, `graph.bisect`,
   wizualizacja matplotlib, CLI `nvb draw|list|apply`, Issues #1–#8, materiały w `docs/`.
+- 2026-11-20 — automatyczna rejestracja produkcji (brak konfliktów przy równoległych PR),
+  zasady zakresu PR, `gh pr update-branch` i sprzątanie po merge'u w README/AGENTS.
 
 ## #2 P0
 
