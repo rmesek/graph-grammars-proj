@@ -35,6 +35,7 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
    `tests/test_p0.py`: build the expected graph by hand, compare with `nx.utils.graphs_equal`;
    `viz_save` for before/after drawings; reuse `tests/conftest.py` fixtures, define new ones
    in your own test file.
+   `tests/test_contract.py` (shared) must pass too: it states what the next stage expects.
 3. Log changes under your issue's section in `PROGRESS.md`.
 
 A production PR touches only these three places. Changes to shared code (`graph`, `base`,

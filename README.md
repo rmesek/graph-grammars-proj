@@ -47,6 +47,22 @@ Na podstawie kryteriów oceny testy przygotowują i sprawdzają:
 - [ ] poprawne współrzędne nowych wierzchołków
 - [ ] rysunek przed/po pokazuje wszystkie węzły, bondy, krawędzie i atrybuty
 
+### Kontrakt produkcji
+
+Wspólny `tests/test_contract.py` opisuje, co produkcja przekazuje kolejnemu etapowi. Sprawdza
+każdą produkcję osobno na ręcznie przygotowanym stanie, więc nie zależy od produkcji innych
+osób; testy produkcji jeszcze niezarejestrowanych są pomijane.
+
+- `pN.py` z klasą `PN(Production)`, `name = "PN"`, LHS jak w tabeli powyżej
+- w każdym stanie (np. „RE oznaczona i na brzegu”) pasuje tylko właściwa produkcja, inne nie
+  zmieniają grafu
+- P1, P2: `BR=1` tylko na krawędzi refinacji, bez ponownego zastosowania
+- P3, P4: dzieci według `graph.bisect`, newest vertex jest ich peakiem, `R=0`, `BR=0`; siatka
+  bez wiszących węzłów i z tym samym polem
+
+Jeśli kontrakt wydaje się sprzeczny ze slajdami, zgłoś to w Issue zamiast zmieniać test w PR
+produkcji.
+
 ## Model cp-grafu
 
 Trójkąt to węzeł `T` (`R`, `P1..P3`) z trzema węzłami-bondami (`RE`, `B`, `BR`) w `networkx`;
