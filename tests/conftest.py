@@ -1,5 +1,6 @@
 """Shared fixtures. ``uv run pytest --viz`` saves drawings from ``viz_save`` to out/tests."""
 
+import re
 from pathlib import Path
 
 import networkx as nx
@@ -18,7 +19,9 @@ def viz_save(request: pytest.FixtureRequest):
 
     def save(g: nx.Graph, tag: str) -> None:
         if request.config.getoption("--viz"):
-            viz.save(g, Path("out/tests") / f"{request.node.name}-{tag}.png", title=tag)
+            safe = re.sub(r'[<>:"/\\|?*]', "_", request.node.name)
+            path = Path("out/tests") / request.path.stem / f"{safe}-{tag}.png"
+            viz.save(g, path, title=tag)
 
     return save
 

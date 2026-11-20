@@ -46,7 +46,8 @@ def check_mesh(g: nx.Graph, total_area: float) -> None:
             if others:
                 assert d["B"] == 0, f"connected bond {n} must have B=0"
                 assert set(cg.side(g, n)) == set(cg.side(g, others[0])), (
-                    f"bonds {n}-{others[0]} must lie on the same side (hanging node?)"
+                    f"bonds {n}-{others[0]} must lie on the same side "
+                    "(in P3, pair shared-edge halves by set(side(g, ...)), not bisect index)"
                 )
             else:
                 assert d["B"] == 1, f"free bond {n} must be on the boundary (B=1); rewire lost?"
@@ -91,6 +92,15 @@ def shared() -> nx.Graph:
     return broken(mesh.square(2), 7)
 
 
+def shared_flipped() -> nx.Graph:
+    """Shared RE where T0 (CCW) and T1 (CW) have opposite orientation -> P3.
+
+    Catches P3 implementations that pair bisect children by index 0/1 instead of coordinates.
+    """
+    g = mesh.from_triangles([(0, 0), (1, 0), (0, 1), (1, 1)], [(0, 1, 2), (1, 2, 3)])
+    return broken(g, 0)
+
+
 def propagate() -> nx.Graph:
     """Refinement edge of T0 marked; T1 across it has its refinement edge elsewhere -> P2."""
     g = mesh.from_triangles([(0, 0), (1, 0), (0, 1), (1, 1)], [(0, 1, 2), (1, 3, 2)], [1, 1])
@@ -107,11 +117,13 @@ STATES: dict[str, tuple[Callable[[], nx.Graph], str | None]] = {
 
 
 def test_states_are_what_they_claim():
-    for build, _ in STATES.values():
+    for build in [*(b for b, _ in STATES.values()), shared_flipped]:
         g = build()
         check_mesh(g, sum(area(g, t) for t in cg.triangles(g)))
     g = shared()
     assert g.nodes[cg.neighbour(g, re_bond(g, 7))]["RE"] == 1
+    g = shared_flipped()
+    assert g.nodes[cg.neighbour(g, re_bond(g, 0))]["RE"] == 1
     g = propagate()
     assert g.nodes[cg.neighbour(g, re_bond(g, 0))]["RE"] == 0
 
@@ -172,10 +184,17 @@ def test_marking_sets_br_only_on_refinement_edge(state, t):
     assert not p.apply(g), f"{name} must not apply again (endless loop in the control)"
 
 
-@pytest.mark.parametrize(("state", "parents"), [("boundary", (0,)), ("shared", (7, 1))])
-def test_bisection_leaves_fresh_conforming_children(state, parents):
+@pytest.mark.parametrize(
+    ("build", "name", "parents"),
+    [
+        (boundary, "P4", (0,)),
+        (shared, "P3", (7, 1)),
+        (shared_flipped, "P3", (0, 1)),
+    ],
+    ids=["boundary", "shared", "shared-opposite-orientation"],
+)
+def test_bisection_leaves_fresh_conforming_children(build, name, parents):
     """P3 / P4 output: children from ``graph.bisect``, newest vertex = peak, ready for P1-P4."""
-    build, name = STATES[state]
     p = production(name)
     g = build()
     total = sum(area(g, t) for t in cg.triangles(g))
@@ -188,10 +207,13 @@ def test_bisection_leaves_fresh_conforming_children(state, parents):
     old = set(cg.triangles(g))
     assert p.apply(g)
     new = set(cg.triangles(g)) - old
-    assert not set(parents) & set(cg.triangles(g)), f"{name}: parents must be removed"
+    assert not set(parents) & set(cg.triangles(g)), (
+        f"{name}: remove parent triangles with graph.remove_triangle"
+    )
     assert {frozenset(cg.vertices(g, t)) for t in new} == expected, f"{name}: child coordinates"
     check_mesh(g, total)
     for t in new:
         assert newest not in cg.side(g, re_bond(g, t)), f"{name}: newest vertex = child's peak"
         assert g.nodes[t]["R"] == 0, f"{name}: children start unmarked (R=0)"
+        # In these states outer sides had BR=0, so inheriting BR on outer sides keeps BR=0.
         assert all(g.nodes[b]["BR"] == 0 for b in cg.bonds(g, t)), f"{name}: children need BR=0"

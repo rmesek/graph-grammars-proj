@@ -113,7 +113,12 @@ class Child(NamedTuple):
 
 
 def bisect(p: Vertices, ref: int) -> tuple[Child, Child]:
-    """Split a triangle with vertices ``p`` along its refinement edge (bond ``ref``)."""
+    """Split a triangle with vertices ``p`` along its refinement edge (bond ``ref``).
+
+    Both children share the same bond convention (1=outer, 2=half-RE, 3=interior), which
+    reverses vertex orientation on one child. In P3, pair the two shared-edge halves by
+    coordinates (``set(side(g, ...))``), not by child index 0/1.
+    """
     peak, a, b = p[ref - 1], p[ref % 3], p[(ref + 1) % 3]
     m = midpoint(a, b)
     return Child((m, peak, a), (ref + 1) % 3 + 1), Child((m, peak, b), ref % 3 + 1)

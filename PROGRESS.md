@@ -15,6 +15,11 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
 - 2026-11-20 — `tests/test_contract.py`: kontrakt P0–P4 (kształt, która produkcja pasuje w
   którym stanie, przekazanie `BR` i świeżych dzieci, siatka bez wiszących węzłów), każda
   produkcja sprawdzana osobno; zweryfikowany na prototypie P1–P4 i 13 celowych błędach.
+- 2026-11-20 — poprawki wygody pracy zespołu po przeglądzie: podkatalogi w `viz_save` (brak
+  nadpisywania rysunków), test przeciwnej orientacji w P3 (`test_contract.py`), łagodniejszy
+  `ruff`, szybsze CI na PR (Ubuntu + równoległy lint; pełna matryca 3 OS na `main`),
+  wyłączenie wymogu aktualnej gałęzi na `main`, `.gitattributes`, ściągawka `pattern()`/`m` i
+  workflow bez `gh` w `README.md`, doprecyzowanie Issues #3–#6.
 
 ## #2 P0
 
