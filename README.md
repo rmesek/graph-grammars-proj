@@ -2,8 +2,10 @@
 
 Projekt z Gramatyk Grafowych: adaptacja siatki trójkątnej metodą *newest vertex bisection*,
 zamodelowana produkcjami P0–P4 na grafach kompozycyjnych (cp-grafach).
-Materiały w [docs/](docs/): `NewestVertex.pdf` (specyfikacja), `Lab_CP_grafyS.pdf` (teoria cp-grafów),
-`30 Years of Newest Vertex Bisection.pdf` (publikacja).
+Materiały: [NewestVertex.pdf](docs/NewestVertex.pdf) (specyfikacja),
+[Lab_CP_grafyS.pdf](docs/Lab_CP_grafyS.pdf) (teoria cp-grafów),
+[30 Years of Newest Vertex Bisection.pdf](docs/30%20Years%20of%20Newest%20Vertex%20Bisection.pdf)
+(publikacja).
 
 ## Instalacja i uruchomienie
 
