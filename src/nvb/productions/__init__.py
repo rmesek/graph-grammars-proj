@@ -1,8 +1,17 @@
-"""Production registry used by the CLI. Implement ``pN.py`` and register it below."""
+"""Production registry used by the CLI.
+
+Every module ``pN.py`` in this package must define class ``PN``; it is registered here
+automatically, so adding a production never edits this file (no merge conflicts).
+"""
+
+import importlib
+import pkgutil
+import re
 
 from nvb.productions.base import Production
-from nvb.productions.p0 import P0
 
 PRODUCTIONS: dict[str, Production] = {
-    "P0": P0(),
+    m.name.upper(): getattr(importlib.import_module(f"{__name__}.{m.name}"), m.name.upper())()
+    for m in sorted(pkgutil.iter_modules(__path__), key=lambda m: m.name)
+    if re.fullmatch(r"p\d+", m.name)
 }

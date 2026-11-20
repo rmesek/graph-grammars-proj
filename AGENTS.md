@@ -30,11 +30,15 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
 
 ## Adding production PN
 
-1. `src/nvb/productions/pN.py` with `class PN(Production)`; register in `productions/__init__.py`.
+1. `src/nvb/productions/pN.py` with `class PN(Production)`; registered automatically.
 2. `tests/test_pN.py` covering every README "Definition of Done" item, modelled on
    `tests/test_p0.py`: build the expected graph by hand, compare with `nx.utils.graphs_equal`;
-   `viz_save` for before/after drawings, fixtures from `tests/conftest.py`.
+   `viz_save` for before/after drawings; reuse `tests/conftest.py` fixtures, define new ones
+   in your own test file.
 3. Log changes under your issue's section in `PROGRESS.md`.
+
+A production PR touches only these three places. Changes to shared code (`graph`, `base`,
+`mesh`, `viz`, `conftest`, CI) go in a separate small PR, so parallel PRs do not conflict.
 
 ## Rules
 
@@ -52,3 +56,5 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
 - PR description ends with one short line naming the agent and model, e.g.
   `Agent: Claude Code (Claude Opus 5.5)`.
 - Update your section of `PROGRESS.md` in every PR.
+- Never amend or force-push pushed commits; add new ones (PRs are squash-merged). Push when
+  a change is ready: every push restarts CI.
