@@ -68,7 +68,9 @@ tests/                       pytest, fixtures w conftest.py
 1. Weź Issue (przypisz się), utwórz gałąź `<nr>-<krotki-opis>`, np. `3-p1`.
 2. Commituj małe kroki; przed pushem: `ruff format`, `ruff check`, `pytest` muszą przejść.
 3. Dopisz wpis w `PROGRESS.md`.
-4. `gh pr create` z `Closes #<nr>`; `main` jest chroniony: CI + 1 approve, merge przez squash.
+4. `gh pr create` z `Closes #<nr>`; `main` jest chroniony: CI + 1 approve + gałąź aktualna
+   względem `main`, merge przez squash. CI działa tylko na PR: ruff → pytest na Ubuntu, Windows
+   i macOS; rysunki z testów do pobrania jako artefakt `drawings`.
 5. Bez trailerów `Co-authored-by` w commitach (także od agentów AI).
 
 Agenci AI: zasady w [AGENTS.md](AGENTS.md).

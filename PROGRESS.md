@@ -15,4 +15,4 @@
 
 - 2026-11-20 — #1: uv/ruff/pytest/CI, model cp-grafu (networkx, bondy jako węzły),
   `Production` + `pattern()`, wizualizacja matplotlib, CLI `nvb draw|list|apply`, Issues #1–#8,
-  materiały kursu w `docs/`.
+  materiały kursu w `docs/`. CI tylko na PR: lint, potem testy na Ubuntu 26.04 / Windows / macOS.
