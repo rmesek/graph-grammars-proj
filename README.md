@@ -9,21 +9,22 @@ Materiały: [NewestVertex.pdf](docs/NewestVertex.pdf) (specyfikacja),
 
 ## Instalacja i uruchomienie
 
-Wymagany [uv](https://docs.astral.sh/uv/) (sam pobierze Pythona 3.13).
+Wymagany [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync                          # środowisko + zależności
 uv run nvb draw -n 2             # rysuje siatkę startową -> out/mesh.png
 uv run nvb list                  # zarejestrowane produkcje
-uv run nvb apply P0 P1 --at 3    # stosuje produkcje (po #2, #3) -> out/apply.png
+uv run nvb apply P0 --at 3       # stosuje produkcje w trójkącie T3 -> out/apply.png
 uv run pytest --viz              # testy + rysunki przed/po w out/tests/
 uv run ruff format . && uv run ruff check .
 ```
 
-## Wymagania (prezentacja, slajdy 29–35)
+## Wymagania
 
-Część 1: szablon bazowy produkcji oraz produkcje P0–P4, każda z testami jednostkowymi
-i wizualizacją grafu (współrzędne muszą pokazywać, który węzeł to który trójkąt).
+Zgodnie ze [specyfikacją](docs/NewestVertex.pdf) (slajdy 29–35): szablon bazowy produkcji
+oraz produkcje P0–P4, każda z testami jednostkowymi i wizualizacją grafu, w której współrzędne
+pokazują, który węzeł odpowiada któremu trójkątowi.
 
 | Issue | Produkcja | LHS | Predykat | Efekt |
 |---|---|---|---|---|
@@ -33,9 +34,9 @@ i wizualizacją grafu (współrzędne muszą pokazywać, który węzeł to któr
 | #5 | P3 | 2 trójkąty (6–1) | `BR6==RE6==1` ∧ `BR1..3==0` ∧ `RE1==1` | bisekcja obu → 4 trójkąty |
 | #6 | P4 | 1 trójkąt | `BR1==B1==RE1==1` | bisekcja → 2 trójkąty |
 
-### Definition of Done produkcji (kryteria oceny)
+### Definition of Done produkcji
 
-Testy przygotowują i sprawdzają:
+Na podstawie kryteriów oceny testy przygotowują i sprawdzają:
 
 - [ ] graf izomorficzny z LHS → produkcja się wykonuje
 - [ ] ten sam graf ze złą wartością atrybutu → produkcja się **nie** wykonuje
