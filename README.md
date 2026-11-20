@@ -22,9 +22,9 @@ uv run ruff format . && uv run ruff check .
 
 ## Wymagania
 
-Zgodnie ze [specyfikacją](docs/NewestVertex.pdf) (slajdy 29–35): szablon bazowy produkcji oraz produkcje P0–P4, każda
-z testami jednostkowymi i wizualizacją grafu, w której współrzędne pokazują, który węzeł
-odpowiada któremu trójkątowi.
+Zgodnie ze [specyfikacją](docs/NewestVertex.pdf) (slajdy 29–35): szablon bazowy produkcji
+oraz produkcje P0–P4, każda z testami jednostkowymi i wizualizacją grafu, w której współrzędne
+pokazują, który węzeł odpowiada któremu trójkątowi.
 
 | Issue | Produkcja | LHS | Predykat | Efekt |
 |---|---|---|---|---|
