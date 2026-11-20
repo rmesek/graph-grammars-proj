@@ -1,0 +1,56 @@
+# Runs only on PRs to main (main is protected: branch must be up to date, so no re-run after merge).
+name: CI
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.3
+      - run: uv sync --locked
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+
+  test:
+    needs: lint
+    strategy:
+      matrix:
+        os: [ubuntu-26.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          cache-python: true
+      - run: uv sync --locked
+      - run: uv run pytest --viz
+      - run: uv run nvb draw -n 2 -o out/mesh.png
+      - if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v7
+        with:
+          name: drawings
+          path: out/
+          retention-days: 7
+
+  # Single required status check for branch protection.
+  check:
+    if: always()
+    needs: [lint, test]
+    runs-on: ubuntu-slim
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+        run: exit 1
+      - run: echo ok
