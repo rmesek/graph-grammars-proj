@@ -12,6 +12,9 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
   zasady zakresu PR, `gh pr update-branch` i sprzątanie po merge'u w README/AGENTS.
 - 2026-11-20 — `viz.draw(graph=...)`: duże siatki (> 64 trójkątów) rysowane bez cp-grafu,
   czytelne adaptacje jak na slajdzie 27; `nvb draw|apply --graph/--no-graph`.
+- 2026-11-20 — `tests/test_contract.py`: kontrakt P0–P4 (kształt, która produkcja pasuje w
+  którym stanie, przekazanie `BR` i świeżych dzieci, siatka bez wiszących węzłów), każda
+  produkcja sprawdzana osobno; zweryfikowany na prototypie P1–P4 i 13 celowych błędach.
 
 ## #2 P0
 
