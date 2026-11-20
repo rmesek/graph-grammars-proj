@@ -14,4 +14,5 @@
 ## Dziennik
 
 - 2026-11-20 — #1: uv/ruff/pytest/CI, model cp-grafu (networkx, bondy jako węzły),
-  `Production` + `pattern()`, wizualizacja matplotlib, CLI `nvb draw|list|apply`, Issues #1–#8.
+  `Production` + `pattern()`, wizualizacja matplotlib, CLI `nvb draw|list|apply`, Issues #1–#8,
+  materiały kursu w `docs/`.

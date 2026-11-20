@@ -1,7 +1,7 @@
 # AGENTS.md
 
 Newest Vertex Bisection of triangular meshes as a cp-graph grammar (productions P0–P4).
-Spec: README "Wymagania" + local `docs/NewestVertex.pdf`. Team of 5, one production each.
+Spec: README "Wymagania" + `docs/NewestVertex.pdf` (theory: `docs/Lab_CP_grafyS.pdf`). Team of 5, one production each.
 
 ## Commands
 

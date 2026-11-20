@@ -5,5 +5,3 @@ __pycache__/
 .ipynb_checkpoints/
 out/
 .DS_Store
-# course materials and papers stay local (public repo)
-docs/*.pdf
