@@ -14,6 +14,7 @@ Wymagany [uv](https://docs.astral.sh/uv/).
 ```bash
 uv sync                          # środowisko + zależności
 uv run nvb draw -n 2             # rysuje siatkę startową -> out/mesh.png
+uv run nvb draw -n 8             # duża siatka: bez cp-grafu (--graph wymusza graf)
 uv run nvb list                  # zarejestrowane produkcje
 uv run nvb apply P0 --at 3       # stosuje produkcje w trójkącie T3 -> out/apply.png
 uv run pytest --viz              # testy + rysunki przed/po w out/tests/
@@ -51,7 +52,8 @@ Na podstawie kryteriów oceny testy przygotowują i sprawdzają:
 Trójkąt to węzeł `T` (`R`, `P1..P3`) z trzema węzłami-bondami (`RE`, `B`, `BR`) w `networkx`;
 bond `i` to bok naprzeciw `Pi`, wspólny bok to krawędź bond–bond. Produkcje dziedziczą po
 `Production` (`src/nvb/productions/base.py`). Rysunek: wypełnienie = `R`, czerwony bok = `RE`,
-przerywany = `BR`, gruby = `B`.
+przerywany = `BR`, gruby = `B`. Siatki powyżej 64 trójkątów rysowane są bez cp-grafu
+(etykiet, bondów, krawędzi), jak na slajdzie 27; `--graph/--no-graph` wymusza tryb.
 
 ## Workflow zespołu
 

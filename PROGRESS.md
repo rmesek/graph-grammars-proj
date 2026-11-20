@@ -10,6 +10,8 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
   wizualizacja matplotlib, CLI `nvb draw|list|apply`, Issues #1–#8, materiały w `docs/`.
 - 2026-11-20 — automatyczna rejestracja produkcji (brak konfliktów przy równoległych PR),
   zasady zakresu PR, `gh pr update-branch` i sprzątanie po merge'u w README/AGENTS.
+- 2026-11-20 — `viz.draw(graph=...)`: duże siatki (> 64 trójkątów) rysowane bez cp-grafu,
+  czytelne adaptacje jak na slajdzie 27; `nvb draw|apply --graph/--no-graph`.
 
 ## #2 P0
 
