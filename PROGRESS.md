@@ -11,6 +11,10 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
 
 ## #2 P0
 
+- 2026-11-20 — `P0(criterion)` (domyślnie każdy trójkąt + kotwica `--at`; `contains(p)` =
+  trójkąt zawierający punkt), rejestracja w CLI, `tests/test_p0.py` wg DoD — wzorzec dla
+  P1–P4: oczekiwany graf budowany ręcznie i porównanie `nx.utils.graphs_equal`.
+
 ## #3 P1
 
 ## #4 P2
