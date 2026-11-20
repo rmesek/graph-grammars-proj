@@ -32,9 +32,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+      # Python 3.13: preinstalled on Windows/macOS, a ~1 s uv download on Ubuntu; no cache needed.
       - uses: astral-sh/setup-uv@v10.3.3
-        with:
-          cache-python: true
       - run: uv sync --locked
       - run: uv run pytest --viz
       - run: uv run nvb draw -n 2 -o out/mesh.png
