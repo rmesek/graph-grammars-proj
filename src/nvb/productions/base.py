@@ -46,6 +46,8 @@ class Production(ABC):
 
     def matches(self, g: nx.Graph, at: Hashable | None = None) -> Iterator[Match]:
         """Yield matches satisfying the predicate; ``at`` restricts them to contain that node."""
+        if at is not None and at not in g:
+            return
         host = g if at is None else g.subgraph(nx.ego_graph(g, at, radius=_RADIUS))
         gm = GraphMatcher(host, self.lhs, node_match=lambda h, p: h["label"] == p["label"])
         for host_to_lhs in gm.subgraph_monomorphisms_iter():

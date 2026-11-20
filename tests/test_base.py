@@ -49,6 +49,11 @@ def test_anchor_inside_bigger_graph(square):
     assert [square.nodes[t]["R"] for t in cg.triangles(square)] == [0, 0, 1, 0]
 
 
+def test_anchor_on_removed_triangle_does_not_match(square):
+    cg.remove_triangle(square, 2)
+    assert not MarkAll().apply(square, at=2)
+
+
 def test_two_triangle_pattern_requires_edge():
     g = nx.Graph()
     a = cg.add_triangle(g, (0, 0), (1, 0), (0, 1), re=(1, 0, 0))

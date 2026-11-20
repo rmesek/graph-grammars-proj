@@ -50,3 +50,19 @@ def test_rewire_moves_connection():
     cg.remove_triangle(g, t_old)
     assert cg.neighbour(g, (t_new, 1)) == other
     assert t_old not in g
+
+
+def test_bisect_children_follow_bond_convention():
+    p = ((0, 0), (2, 0), (0, 2))
+    c1, c2 = cg.bisect(p, ref=1)
+    assert c1.vertices == ((1, 1), (0, 0), (2, 0))
+    assert c2.vertices == ((1, 1), (0, 0), (0, 2))
+    g = nx.Graph()
+    parent = cg.add_triangle(g, *p)
+    refinement_edge = set(cg.side(g, (parent, 1)))
+    for c in (c1, c2):
+        t = cg.add_triangle(g, *c.vertices)
+        assert set(cg.side(g, (t, 1))) == set(cg.side(g, (parent, c.outer)))
+        half = set(cg.side(g, (t, 2)))
+        assert (1, 1) in half and len(half & refinement_edge) == 1
+        assert set(cg.side(g, (t, 3))) == {(1, 1), (0, 0)}  # interior side: newest vertex-peak

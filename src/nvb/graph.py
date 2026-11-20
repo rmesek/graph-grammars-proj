@@ -9,11 +9,13 @@
 
 import math
 from collections.abc import Iterable
+from typing import NamedTuple
 
 import networkx as nx
 
 type Point = tuple[float, float]
 type Bond = tuple[int, int]
+type Vertices = tuple[Point, Point, Point]
 
 T = "T"
 BOND = "bond"
@@ -95,3 +97,23 @@ def midpoint(a: Point, b: Point) -> Point:
 
 def distance(a: Point, b: Point) -> float:
     return math.dist(a, b)
+
+
+class Child(NamedTuple):
+    """One half of a bisected triangle (Calculate1/Calculate2 on the slides).
+
+    ``vertices`` = (newest vertex, old peak, end of the refinement edge), so in the child
+    bond 1 is the parent's outer side (new refinement edge), bond 2 half of the parent's
+    refinement edge, bond 3 the new interior side shared by both children.
+    ``outer`` is the parent bond index whose connection moves to the child's bond 1.
+    """
+
+    vertices: Vertices
+    outer: int
+
+
+def bisect(p: Vertices, ref: int) -> tuple[Child, Child]:
+    """Split a triangle with vertices ``p`` along its refinement edge (bond ``ref``)."""
+    peak, a, b = p[ref - 1], p[ref % 3], p[(ref + 1) % 3]
+    m = midpoint(a, b)
+    return Child((m, peak, a), (ref + 1) % 3 + 1), Child((m, peak, b), ref % 3 + 1)

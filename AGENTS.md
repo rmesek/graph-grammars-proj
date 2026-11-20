@@ -24,7 +24,8 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
   to host nodes. Matching is `networkx` subgraph monomorphism; `apply(g, at=node)` anchors it.
   Pattern bond numbers are free; geometry must use the host bond's `index`.
 - Embedding: new triangles take over external connections via `graph.rewire(old, new)`.
-- New vertex = midpoint of the refinement edge; P3 and P4 share one bisection helper in `nvb.graph`.
+- `graph.bisect(vertices, ref)` gives both children (Calculate1/2): newest vertex = midpoint
+  of the refinement edge; child bond 1 = new refinement edge. Use it in P3 and P4.
 - `nvb.mesh` initial meshes, `nvb.viz` matplotlib drawing, `nvb.cli` typer CLI.
 
 ## Adding production PN
@@ -32,7 +33,7 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
 1. `src/nvb/productions/pN.py` with `class PN(Production)`; register in `productions/__init__.py`.
 2. `tests/test_pN.py` covering every README "Definition of Done" item; use `viz_save` for
    before/after drawings and fixtures from `tests/conftest.py`.
-3. Add a line to `PROGRESS.md`.
+3. Log changes under your issue's section in `PROGRESS.md`.
 
 ## Rules
 
@@ -49,4 +50,4 @@ All three (format, lint, tests) must pass before a commit; CI runs the same.
 - Commit messages: imperative, short. **No `Co-authored-by` or other AI attribution trailers.**
 - PR description ends with one short line naming the agent and model, e.g.
   `Agent: Claude Code (Claude Opus 5.5)`.
-- Update `PROGRESS.md` in every PR.
+- Update your section of `PROGRESS.md` in every PR.

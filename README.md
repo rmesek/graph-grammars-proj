@@ -55,6 +55,6 @@ przerywany = `BR`, gruby = `B`.
 ## Workflow zespołu
 
 1. Przypisz się do Issue, utwórz gałąź `<nr>-<opis>`, np. `3-p1`.
-2. Przed pushem: `ruff` i `pytest` zielone, wpis w `PROGRESS.md`.
+2. Przed pushem: `ruff` i `pytest` zielone, wpis w swojej sekcji `PROGRESS.md`.
 3. `gh pr create` z `Closes #<nr>`. Merge (squash) po zielonym CI i aktualizacji gałęzi
    względem `main`. CI działa tylko na PR; rysunki z testów są w artefakcie `drawings`.
