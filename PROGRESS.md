@@ -22,6 +22,8 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
   workflow bez `gh` w `README.md`, doprecyzowanie Issues #3–#6.
 - 2026-11-20 — doprecyzowanie opisu `BR=0` na połówkach krawędzi refinacji w P3/P4 (`README.md`,
   komentarz w `tests/test_contract.py`).
+- 2026-11-20 — przywrócenie zwięzłego opisu instalacji `Wymagany uv.` w `README.md` (cofnięcie
+  nadmiarowego dopisku o Pythonie 3.13 z PR #14, wcześniej usuniętego w PR #10).
 
 ## #2 P0
 
