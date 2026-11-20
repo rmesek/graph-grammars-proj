@@ -20,6 +20,8 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
   `ruff`, szybsze CI na PR (Ubuntu + równoległy lint; pełna matryca 3 OS na `main`),
   wyłączenie wymogu aktualnej gałęzi na `main`, `.gitattributes`, ściągawka `pattern()`/`m` i
   workflow bez `gh` w `README.md`, doprecyzowanie Issues #3–#6.
+- 2026-11-20 — doprecyzowanie opisu `BR=0` na połówkach krawędzi refinacji w P3/P4 (`README.md`,
+  komentarz w `tests/test_contract.py`).
 
 ## #2 P0
 

@@ -59,8 +59,8 @@ osób; testy produkcji jeszcze niezarejestrowanych są pomijane.
   zmieniają grafu
 - P1, P2: `BR=1` tylko na krawędzi refinacji, bez ponownego zastosowania
 - P3, P4: dzieci według `graph.bisect`, newest vertex jest ich peakiem, rodzice usunięci
-  (`graph.remove_triangle`), `R=0`, na nowych bokach `BR=0` (na zewnętrznych `B`/`BR` dziedziczone);
-  siatka bez wiszących węzłów i z tym samym polem
+  (`graph.remove_triangle`), `R=0`, na nowych bokach i połówkach krawędzi refinacji `BR=0`, na
+  niepodzielonych bokach rodzica `B`/`BR` dziedziczone; siatka bez wiszących węzłów i z tym samym polem
 
 Jeśli kontrakt wydaje się sprzeczny ze slajdami, zgłoś to w Issue zamiast zmieniać test w PR
 produkcji.
