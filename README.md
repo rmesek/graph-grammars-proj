@@ -69,7 +69,8 @@ produkcji.
 
 Trójkąt to węzeł `T` (`R`, `P1..P3`) z trzema węzłami-bondami (`RE`, `B`, `BR`) w `networkx`;
 bond `i` to bok naprzeciw `Pi`, wspólny bok to krawędź bond–bond. Rysunek: wypełnienie = `R`,
-czerwony bok = `RE`, przerywany = `BR`, gruby = `B`. Siatki powyżej 64 trójkątów rysowane są
+czerwony bok = `RE`, przerywany = `BR`, gruby = `B` (legenda pod rysunkiem, lekkie osie
+współrzędnych, numer `Tn` przy szczycie trójkąta). Siatki powyżej 64 trójkątów rysowane są
 bez cp-grafu (etykiet, bondów, krawędzi), jak na slajdzie 27; `--graph/--no-graph` wymusza tryb.
 
 ### Jak napisać produkcję (`Production`)

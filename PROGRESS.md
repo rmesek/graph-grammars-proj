@@ -24,6 +24,9 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
   komentarz w `tests/test_contract.py`).
 - 2026-11-20 — przywrócenie zwięzłego opisu instalacji `Wymagany uv.` w `README.md` (cofnięcie
   nadmiarowego dopisku o Pythonie 3.13 z PR #14, wcześniej usuniętego w PR #10).
+- 2026-11-27 — czytelniejszy rysunek `nvb.viz`: legenda pod rysunkiem pogrupowana jak na
+  slajdach 17–18 (struktura grafu, element, krawędź), numer `Tn` przy szczycie trójkąta, lekkie
+  osie współrzędnych z siatką.
 
 ## #2 P0
 
