@@ -37,6 +37,12 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
 
 ## #5 P3
 
+- 2026-11-27 — implementacja `P3(Production)` (`src/nvb/productions/p3.py`: dopasowanie dwóch
+  trójkątów ze wspólną krawędzią refinacji, predykat `BR6==RE6==1 ∧ BR1..3==0 ∧ RE1==1`, bisekcja
+  przez `graph.bisect`, przepięcie otoczenia przez `graph.rewire` i parowanie połówek wspólnej
+  krawędzi po współrzędnych), testy jednostkowe z wizualizacją w `tests/test_p3.py` oraz zielony
+  `tests/test_contract.py`.
+
 ## #6 P4
 
 ## #7 Aplikacja (RefineTriangle)
