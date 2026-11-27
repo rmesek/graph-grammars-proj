@@ -36,6 +36,11 @@ każdy pisze wyłącznie we własnej sekcji (brak konfliktów przy merge'u).
 
 ## #3 P1
 
+- 2026-11-27 — `P1`: `R==1` ∧ `BR1..3==0` ∧ `RE1==1` → `BR1=1` na krawędzi
+  refinacji (bond 1 wzorca = bond hosta z `RE=1`, dowolny `index`), `R` bez zmian;
+  `tests/test_p1.py` wg DoD (złe atrybuty, brak bondu, większy graf `square(2)`, brak
+  ponownego zastosowania, rysunek z przerywaną krawędzią RE, CLI `apply P0 P1`).
+
 ## #4 P2
 
 ## #5 P3
